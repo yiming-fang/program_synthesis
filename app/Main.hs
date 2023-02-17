@@ -2,6 +2,7 @@
 module Main where
 
 import BruteForce (solve)
+import TypeDirected (search, ex1, ex2)
 import System.Environment (
   getArgs,
   getProgName,
@@ -17,6 +18,9 @@ main = do
       let input = (map extractLine . lines) contents
           res = solve input
           (funcs, funcNames) = unzip $ take 10 res
+      mapM_ putStrLn funcNames
+    [] -> do
+      let (funcs, funcNames) = unzip $ search ex2
       mapM_ putStrLn funcNames
     _ -> do
       pn <- getProgName

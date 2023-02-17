@@ -20,6 +20,9 @@ cartesian :: FuncList -> FuncList
 cartesian fs = [(f2 . f1, n2 ++ " . " ++ n1) | (f1, n1) <- fs, (f2, n2) <- moves]
 
 solve :: [(Int, Int)] -> FuncList
-solve pairs = filter checkPairs $ searchSpace moves
+solve pairs = filter checkPairs limitedSpace
  where
   checkPairs (f, _) = all (\(i, o) -> f i == o) pairs
+  limitedSpace = take limit $ searchSpace moves
+  limit = 100000000
+  
